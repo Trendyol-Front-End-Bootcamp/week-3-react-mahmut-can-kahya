@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
-import CharList from "./components/CardList";
-import { FilterSide } from "./components/FilterSide";
-import CharServices from "./services/CharServices";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import DetailPage from "./pages/DetailPage";
+import HomePage from "./pages/HomePage";
+import { AppUrls } from "./utils/AppUrls";
 
 export default function App() {
-  const [chars, setChars] = useState([]);
-  useEffect(() => {
-    CharServices.getAllChar().then((res) => {
-      setChars(res.data.results);
-    });
-  }, []);
-  console.log(chars);
   return (
-    <div className="App">
-      <div>
-        <FilterSide />
-        <CharList chars={chars} />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path={AppUrls.Home}>
+          <HomePage />
+        </Route>
+        <Route exact path={AppUrls.Detail + "/:id"}>
+          <DetailPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
