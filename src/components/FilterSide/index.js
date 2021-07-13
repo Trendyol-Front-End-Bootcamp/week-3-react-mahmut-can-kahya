@@ -1,15 +1,50 @@
 import React from "react";
+import Select from "../../core/components/Select";
 
-export const FilterSide = () => {
+const filtersOption = [
+  {
+    type: "gender",
+    options: [
+      { value: "all", text: "all" },
+      { value: "female", text: "female" },
+      { value: "male", text: "male" },
+      { value: "genderless", text: "genderless" },
+      { value: "unknown", text: "unknown" },
+    ],
+    label: "Gender",
+  },
+  {
+    type: "status",
+    options: [
+      { value: "all", text: "all" },
+      { value: "alive", text: "alive" },
+      { value: "dead", text: "dead" },
+      { value: "unknown", text: "unknown" },
+    ],
+    label: "Status",
+  },
+];
+
+export const FilterSide = ({ filtersValue, setFiltersValue }) => {
+  const onSelect = (type, value) => {
+    const _filtersValue = { ...filtersValue };
+    _filtersValue[type] = value;
+    setFiltersValue(_filtersValue);
+  };
   return (
     <div>
-      <label for="cars">Character Status</label>
-
-      <select name="alive" id="alive">
-        <option value="alive">Alive</option>
-        <option value="dead">Dead</option>
-        <option value="unknown">Unknown</option>
-      </select>
+      {filtersOption.map((filter, index) => {
+        return (
+          <Select
+            key={index}
+            type={filter.type}
+            options={filter.options}
+            label={filter.label}
+            selected={filtersValue[filter.type]}
+            onSelect={(type, value) => onSelect(type, value)}
+          />
+        );
+      })}
     </div>
   );
 };
