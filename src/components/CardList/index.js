@@ -11,7 +11,10 @@ const CharList = ({ chars, loading, page, pages, setPage }) => {
         observer.current.disconnect();
       }
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
+        console.log(pages);
+        console.log(page);
+
+        if (entries[0].isIntersecting && pages > page) {
           setPage(page + 1);
           console.log("Visible");
         }

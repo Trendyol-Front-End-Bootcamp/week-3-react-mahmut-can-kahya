@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CharList from "../../components/CardList";
 import { FilterSide } from "../../components/FilterSide";
+import Loading from "../../core/Loading";
 import CharServices from "../../services/CharServices";
 
 const HomePage = () => {
@@ -16,20 +17,19 @@ const HomePage = () => {
     setLoading(true);
     CharServices.getFilteredChar({ ...filtersValue, page })
       .then((res) => {
-        console.log(res);
-        if (chars.length === 0) {
+        setPages(res.data.info.pages);
+        if (chars.length === 0 || pages === page) {
           return res.data.results;
         } else {
           return [...chars, ...res.data.results];
         }
-        setPages(res.data.info.pages);
       })
       .then((res) => {
         console.log(res);
         setTimeout(() => {
           setChars(res);
           setLoading(false);
-        }, 1.5 * 1000);
+        }, 0.75 * 1000);
       });
   }, [filtersValue, page]);
   useEffect(() => {
@@ -51,7 +51,7 @@ const HomePage = () => {
           setPage={setPage}
           pages={pages}
         />
-        {loading && <div>Loading....</div>}
+        <Loading loading={loading} />
       </div>
     </div>
   );

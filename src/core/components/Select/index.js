@@ -1,11 +1,12 @@
 import React from "react";
+import { Option, SelectLabel, SelectWrapper } from "./styles";
 
 const Select = ({ type, options, selected, onSelect, label }) => {
   return (
-    <>
-      <label htmlFor={type}>{label}</label>
+    <div>
+      <SelectLabel htmlFor={type}>{label}: </SelectLabel>
 
-      <select
+      <SelectWrapper
         name={type}
         id={type}
         value={selected}
@@ -13,13 +14,13 @@ const Select = ({ type, options, selected, onSelect, label }) => {
       >
         {options?.map((option, index) => {
           return (
-            <option key={index} value={option.value}>
+            <Option className="option" key={index} value={option.value}>
               {option.text}
-            </option>
+            </Option>
           );
         })}
-      </select>
-    </>
+      </SelectWrapper>
+    </div>
   );
 };
 
