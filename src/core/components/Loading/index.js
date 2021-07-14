@@ -5,7 +5,7 @@ const Loading = ({ loading }) => {
   return (
     loading && (
       <Loader>
-        <div class="lds-ring">
+        <div className="lds-ring">
           <div></div>
           <div></div>
           <div></div>

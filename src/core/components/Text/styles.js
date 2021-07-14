@@ -8,4 +8,6 @@ export const Text = styled.p`
   font-size: ${(props) => props.size};
   color: ${(props) => props.color};
   font-family: ${(props) => props.family};
+  font-family: ${(props) => props.family};
+  text-align: ${(props) => (props.centered ? "center" : "left")}; ;
 `;
