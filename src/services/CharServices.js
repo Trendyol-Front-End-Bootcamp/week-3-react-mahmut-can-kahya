@@ -5,18 +5,16 @@ class CharServices {
   getAllChar = async () => {
     return await axios.get("https://rickandmortyapi.com/api/character/?");
   }; */
-  getFilteredChar = async ({ gender, status, page }) => {
-    console.log(page);
-    console.log(`character/?${
-      gender && gender !== "all" ? "gender=" + gender + "&" : ""
-    }${status && status !== "all" ? "status=" + status + "&" : ""}
-    ${page ? "page=" + page : ""}`);
+  getFilteredChars = async ({ gender, status, page }) => {
     return await axios.get(
       `https://rickandmortyapi.com/api/character/?${"page=" + page + "&"}${
         gender && gender !== "all" ? "gender=" + gender + "&" : ""
       }${status && status !== "all" ? "status=" + status : ""}
       `
     );
+  };
+  getSingleChar = async (id) => {
+    return await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
   };
 }
 

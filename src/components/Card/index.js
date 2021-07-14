@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { Text } from "../../core/components/Text/styles";
 import { AppUrls } from "../../utils/AppUrls";
+import { getStatusIcon } from "../../helpers/getStatusIcon";
 import {
   AliveIcon,
   Container,
@@ -19,16 +20,7 @@ const Card = React.forwardRef(
   ({ id, name, species, gender, type, status, image, location }, ref) => {
     const { color, size, family } = useTheme();
     const history = useHistory();
-    const getStatusIcon = (status) => {
-      switch (status) {
-        case "Alive":
-          return <AliveIcon />;
-        case "Dead":
-          return <DeadIcon />;
-        default:
-          return <DeadIcon />;
-      }
-    };
+    
     const onClickCard = () => {
       history.push(`${AppUrls.Detail}/${id}`);
     };

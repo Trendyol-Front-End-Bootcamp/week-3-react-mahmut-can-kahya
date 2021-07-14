@@ -11,18 +11,14 @@ const CharList = ({ chars, loading, page, pages, setPage }) => {
         observer.current.disconnect();
       }
       observer.current = new IntersectionObserver((entries) => {
-        console.log(pages);
-        console.log(page);
-
         if (entries[0].isIntersecting && pages > page) {
+          console.log("girdi");
           setPage(page + 1);
-          console.log("Visible");
         }
       });
       if (node) {
         observer.current.observe(node);
       }
-      console.log(node);
     },
     [loading]
   );
