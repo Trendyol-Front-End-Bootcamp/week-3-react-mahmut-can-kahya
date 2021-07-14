@@ -1,5 +1,6 @@
 import React from "react";
-import Select from "../../core/components/Select";
+import Select from "../../core/components/Select/";
+import { FilterSideWrapper } from "./styles";
 
 const filtersOption = [
   {
@@ -32,7 +33,7 @@ export const FilterSide = ({ filtersValue, setFiltersValue }) => {
     setFiltersValue(_filtersValue);
   };
   return (
-    <div>
+    <FilterSideWrapper>
       {filtersOption.map((filter, index) => {
         return (
           <Select
@@ -45,6 +46,6 @@ export const FilterSide = ({ filtersValue, setFiltersValue }) => {
           />
         );
       })}
-    </div>
+    </FilterSideWrapper>
   );
 };
