@@ -18,6 +18,7 @@ const DeadIcon = styled.div`
   margin-right: 8px;
 `;
 
+//Karakter kartlarında bulunan durum iconununu döndüren fonksiyon
 export const getStatusIcon = (status) => {
   switch (status) {
     case "Alive":

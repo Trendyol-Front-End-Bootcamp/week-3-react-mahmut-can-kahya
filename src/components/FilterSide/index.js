@@ -2,6 +2,7 @@ import React from "react";
 import Select from "../../core/components/Select/";
 import { FilterSideWrapper } from "./styles";
 
+//filtre verisini
 const filtersOption = [
   {
     type: "gender",

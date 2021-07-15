@@ -4,6 +4,8 @@ import { ContainerList } from "./styles";
 
 const CharList = ({ chars, loading, page, pages, setPage }) => {
   const observer = useRef();
+
+  //Bir dinleyici ile listenin son elemanına gelinip gelinmediği kontrolü yapılır.
   const lastCharElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -11,6 +13,7 @@ const CharList = ({ chars, loading, page, pages, setPage }) => {
         observer.current.disconnect();
       }
       observer.current = new IntersectionObserver((entries) => {
+        //listenin sonuna gelindiğinde eğer sayfa varsa sayfa numarası arttırılır ve apiye istek atılır.
         if (entries[0].isIntersecting && pages > page) {
           console.log("girdi");
           setPage(page + 1);

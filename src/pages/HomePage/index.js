@@ -13,6 +13,8 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  //karakter servisinden filtrelenmiş veriyi çeker.
   const getChars = async (filter, pageNum, prevChars) => {
     setLoading(true);
     await CharServices.getFilteredChars({ ...filter, page: pageNum }).then(
@@ -30,11 +32,15 @@ const HomePage = () => {
       setLoading(false);
     }, 0.75 * 1000);
   };
+
+  //Filtre değiştiğinde sayfa numarasını sıfırlar ve apiye yeni filtreyle istek atar.
   useEffect(() => {
     setPage(1);
     setChars([]);
     getChars(filtersValue, 1, []);
   }, [filtersValue]);
+
+  //sayfa numarası değiştikçe apiye istek atar
   useEffect(() => {
     if (chars.length !== 0) {
       getChars(filtersValue, page, chars);

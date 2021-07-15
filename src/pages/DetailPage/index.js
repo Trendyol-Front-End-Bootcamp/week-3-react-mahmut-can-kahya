@@ -19,7 +19,10 @@ const DetailPage = () => {
   const [char, setChar] = useState(null);
   const { color, size, family } = useTheme();
 
+  //Karakter kartlarına tıklanınca gelen id parametresi
   let { id } = useParams();
+
+  //url üzerinden okunan id ile apiye istek atar ve karakter bilgisini getirir.
   useEffect(() => {
     setLoading(true);
     CharServices.getSingleChar(id)

@@ -21,6 +21,7 @@ const Card = React.forwardRef(
     const { color, size, family } = useTheme();
     const history = useHistory();
     
+    //karta tıklanınca detay sayfasına yönlenir.
     const onClickCard = () => {
       history.push(`${AppUrls.Detail}/${id}`);
     };

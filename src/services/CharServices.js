@@ -1,10 +1,7 @@
 import axios from "axios";
 
 class CharServices {
-  /* 
-  getAllChar = async () => {
-    return await axios.get("https://rickandmortyapi.com/api/character/?");
-  }; */
+  //verilen filtreye göre apiye istek gönderir
   getFilteredChars = async ({ gender, status, page }) => {
     return await axios.get(
       `https://rickandmortyapi.com/api/character/?${"page=" + page + "&"}${
@@ -13,6 +10,7 @@ class CharServices {
       `
     );
   };
+  //parametre verilen id'ye göre apiye istek atar, karakter detayını döndürür
   getSingleChar = async (id) => {
     return await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
   };
