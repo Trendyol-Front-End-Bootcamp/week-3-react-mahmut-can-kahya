@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CharList from "../../components/CardList";
 import { FilterSide } from "../../components/FilterSide";
 import Loading from "../../core/components/Loading";
-import CharServices from "../../services/CharServices";
+import CharService from "../../services/char-service";
 
 const HomePage = () => {
   const [chars, setChars] = useState([]);
@@ -11,23 +11,29 @@ const HomePage = () => {
     status: "all",
   });
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const resetFilter = () => {
+    setPage(1);
+    setChars([]);
+  };
 
   //karakter servisinden filtrelenmiş veriyi çeker.
   const getChars = async (filter, pageNum, prevChars) => {
     setLoading(true);
-    await CharServices.getFilteredChars({ ...filter, page: pageNum }).then(
-      (res) => {
-        console.log(res.config.url);
-        setPages(res.data.info.pages);
-        if (chars.length === 0) {
-          setChars(res.data.results);
-        } else {
-          setChars([...prevChars, ...res.data.results]);
-        }
-      }
-    );
+    const result = await CharService.getFilteredChars({
+      ...filter,
+      page: pageNum,
+    });
+
+    setPageCount(result.info.pageCount);
+    if (chars.length === 0) {
+      setChars(result.results);
+    } else {
+      setChars([...prevChars, ...result.results]);
+    }
+
     setTimeout(() => {
       setLoading(false);
     }, 0.75 * 1000);
@@ -35,8 +41,7 @@ const HomePage = () => {
 
   //Filtre değiştiğinde sayfa numarasını sıfırlar ve apiye yeni filtreyle istek atar.
   useEffect(() => {
-    setPage(1);
-    setChars([]);
+    resetFilter();
     getChars(filtersValue, 1, []);
   }, [filtersValue]);
 
@@ -58,7 +63,7 @@ const HomePage = () => {
           loading={loading}
           page={page}
           setPage={setPage}
-          pages={pages}
+          pageCount={pageCount}
         />
         <Loading loading={loading} />
       </div>

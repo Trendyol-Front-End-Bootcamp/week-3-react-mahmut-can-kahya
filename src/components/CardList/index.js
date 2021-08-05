@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import Card from "../Card";
 import { ContainerList } from "./styles";
 
-const CharList = ({ chars, loading, page, pages, setPage }) => {
+const CharList = ({ chars, loading, page, pageCount, setPage }) => {
   const observer = useRef();
 
   //Bir dinleyici ile listenin son elemanına gelinip gelinmediği kontrolü yapılır.
@@ -14,7 +14,7 @@ const CharList = ({ chars, loading, page, pages, setPage }) => {
       }
       observer.current = new IntersectionObserver((entries) => {
         //listenin sonuna gelindiğinde eğer sayfa varsa sayfa numarası arttırılır ve apiye istek atılır.
-        if (entries[0].isIntersecting && pages > page) {
+        if (entries[0].isIntersecting && pageCount > page) {
           console.log("girdi");
           setPage(page + 1);
         }

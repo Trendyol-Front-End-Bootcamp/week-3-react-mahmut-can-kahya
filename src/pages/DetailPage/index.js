@@ -4,7 +4,7 @@ import { useTheme } from "styled-components";
 import Loading from "../../core/components/Loading";
 import { Text } from "../../core/components/Text/styles";
 import { getStatusIcon } from "../../helpers/getStatusIcon";
-import CharServices from "../../services/CharServices";
+import CharServices from "../../services/char-service";
 import {
   Container,
   DetailWrapper,
@@ -25,9 +25,9 @@ const DetailPage = () => {
   //url üzerinden okunan id ile apiye istek atar ve karakter bilgisini getirir.
   useEffect(() => {
     setLoading(true);
-    CharServices.getSingleChar(id)
+    CharServices.getCharDetail(id)
       .then((res) => {
-        return res.data;
+        return res;
       })
       .then((res) => {
         setTimeout(() => {
